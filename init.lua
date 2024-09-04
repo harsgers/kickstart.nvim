@@ -324,6 +324,10 @@ require('lazy').setup({
       },
     },
   },
+  { 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' },
+  { 'neovim/nvim-lspconfig' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/nvim-cmp' },
 
   -- NOTE: Plugins can specify dependencies.
   --
@@ -606,7 +610,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -824,6 +828,26 @@ require('lazy').setup({
     end,
   },
   --THEME THIS IS THE THEME COLORSCHEME WHATEVER
+  { -- You can easily change to a different colorscheme.
+    -- Change the name of the colorscheme plugin below, and then
+    -- change the command in the config to whatever the name of that colorscheme is.
+    --
+    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    -- i changed this to this
+    'ellisonleao/grubox.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    config = true,
+    opts = ...,
+    init = function()
+      -- Load the colorscheme here.
+      -- Like many other themes, this one has different styles, and you could load
+      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+      vim.cmd.colorscheme 'gruvbox'
+
+      -- You can configure highlights by doing something like:
+      vim.cmd.hi 'Comment gui=none'
+    end,
+  },
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true, opts = ... },
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
