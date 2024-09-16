@@ -828,13 +828,14 @@ require('lazy').setup({
     end,
   },
   --THEME THIS IS THE THEME COLORSCHEME WHATEVER
+  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true, opts = ... },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     -- i changed this to this
-    'ellisonleao/grubox.nvim',
+    'ellisonleao/gruvbox.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = true,
     opts = ...,
@@ -848,7 +849,6 @@ require('lazy').setup({
       vim.cmd.hi 'Comment gui=none'
     end,
   },
-  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true, opts = ... },
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
