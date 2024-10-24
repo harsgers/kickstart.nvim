@@ -611,6 +611,7 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         gopls = {},
+        templ = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -828,7 +829,7 @@ require('lazy').setup({
     end,
   },
   --THEME THIS IS THE THEME COLORSCHEME WHATEVER
-  {
+   {
     'EdenEast/nightfox.nvim',
     priority = 1000,
     init = function()
