@@ -228,6 +228,9 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+  {
+    'nvim-lua/plenary.nvim',
+  },
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
@@ -612,6 +615,8 @@ require('lazy').setup({
         clangd = {},
         gopls = {},
         templ = {},
+        glsl_analyzer = {},
+        jdtls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -656,12 +661,14 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        ensure_installed = '',
+        automatic_installation = true,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
+            -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
@@ -670,6 +677,15 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'nvim-flutter/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = true,
+  },
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
@@ -829,11 +845,12 @@ require('lazy').setup({
     end,
   },
   --THEME THIS IS THE THEME COLORSCHEME WHATEVER
-   {
-    'EdenEast/nightfox.nvim',
+  {
+    'morhetz/gruvbox', -- or use 'ellisonleao/gruvbox.nvim' for a Lua version
+    lazy = false, -- Load it immediately (not lazily)
     priority = 1000,
     init = function()
-      vim.cmd 'colorscheme nightfox'
+      vim.cmd 'colorscheme gruvbox'
       vim.cmd.hi 'Comment gui=none'
     end,
   },
